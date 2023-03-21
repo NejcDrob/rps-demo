@@ -12,16 +12,17 @@ public class PlayerController : MonoBehaviour
     public float speed;
     private Rigidbody rb;
     private int count;
-    public TMP_Text countText;
-    public TMP_Text winText;
     private int wincon = 0;
     public float PlaceX;
     public float PlaceZ;
-    public GameObject player;
+    public TextMeshProUGUI winText;
+    public TextMeshProUGUI countText;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        winText = GameObject.Find("Canvas/winText").GetComponent<TextMeshProUGUI>();
+        countText = GameObject.Find("Canvas/countText").GetComponent<TextMeshProUGUI>();
         count = 0;
         SetCountText();
     }
@@ -50,14 +51,15 @@ public class PlayerController : MonoBehaviour
     }
     void SetCountText()
     {
-        if (count >= 2)
+        countText.text = "Score: " + count.ToString();
+        if (count >= 5)
         {
             wincon = 1;
-            winText.text = " YOU WIN \n PRESS R TO RESET";
+            winText.text = "YOU WIN \n PRESS R TO RESET";
         }
         if (count == 69)
         {
-            countText.text = "Count: " + count.ToString() + " NICE!";
+            countText.text = "Score: " + count.ToString() + " NICE!";
         }
     }
     void Update()
